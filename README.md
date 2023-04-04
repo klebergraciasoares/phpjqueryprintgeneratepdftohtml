@@ -1,7 +1,7 @@
 # phpjqueryprintgeneratepdftohtml
 
 - Gerando Impressão para Mini impressora MPT-II MINI Impressora Térmica 58mm, PDF a partir de HTML e enviado por Whats
-
+ 
 Neste repositório, mostraremos uma forma simples de gerar uma impressão, pdf a partir de um html e o enviamos por Whatsapp
 
 O teste foi feito na Mini Impressora MPT-II "MINI Impressora Térmica 58mm" que o pessoal diz ser a impressora para tirar pedidos Ifood e aplicativos deste segmento, fizemos uma página em html que faz a seguinte geração:
