@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Exemplo Cupom Mini Impressora MPT-II - Galaxyz do Brasil</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>  
+  
+  
+  
+  <style>
+      
+@color-gray: #BCBCBC;
+.text {
+	&-center { text-align: center; }
+}
+.ttu { text-transform: uppercase; }
+
+.printer-ticket {
+	display: table !important;
+	width: 100%;
+	max-width: 400px;
+	font-weight: light;
+	line-height: 1.3em;
+	@printer-padding-base: 10px;
+	&, & * { 
+		font-family: Tahoma, Geneva, sans-serif; 
+		font-size: 10px; 
+	}
+
+	th:nth-child(2),
+	td:nth-child(2) {
+		width: 50px;
+	}
+	
+	th:nth-child(3) ,
+	td:nth-child(3) { 
+		width: 90px; text-align: right; 
+	}
+	
+	th { 
+		font-weight: inherit;
+		padding: @printer-padding-base 0;
+		text-align: center;
+		border-bottom: 1px dashed @color-gray;
+	}
+	tbody {
+		tr:last-child td { padding-bottom: @printer-padding-base; }
+	}
+	tfoot {
+		.sup td {
+			padding: @printer-padding-base 0;
+			border-top: 1px dashed @color-gray;
+		}
+		.sup.p--0 td { padding-bottom: 0; }
+	}
+	
+	.title { font-size: 1.5em; padding: @printer-padding-base*1.5 0; }
+	.top {
+		td { padding-top: @printer-padding-base; }
+	}
+	.last td { padding-bottom: @printer-padding-base; }
+}      
+      
+  </style>
+  
+  
+
+<!-- SCRIPT PARA GERAR PDF E JA ENVIA POR WHATS -->  
+<script>
+$(document).ready(function () {  
+    var form = $('.form'),  
+    cache_width = form.width(),  
+    a4 = [595.28, 841.89]; // for a4 size paper width and height  
+
+    $('#create_pdf').on('click', function () {  
+        $('body').scrollTop(0);  
+        createPDF();  
+    });  
+
+    function createPDF() {  
+        getCanvas().then(function (canvas) {  
+            var  
+             img = canvas.toDataURL("image/png"),  
+             doc = new jsPDF({  
+                 unit: 'px',  
+                 format: 'a4'  
+             });  
+            doc.addImage(img, 'JPEG', 20, 20);  
+            doc.save('Salestool-html-to-pdf.pdf');  
+            form.width(cache_width);  
+        });  
+    }  
+
+    function getCanvas() {  
+        form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
+        return html2canvas(form, {  
+            imageTimeout: 2000,  
+            removeContainer: true  
+        });  
+    }
+});
+</script>  
+  
+</head>
+<body>
+
+
+
+<form class="form">   
+<table class="printer-ticket">
+ 	<thead>
+		<tr>
+			<th class="title" colspan="5"><p class="h3">Salestool Mobile</p></th>
+		</tr>
+		<tr>
+			<th colspan="5"><p class="h4">04/03/2023 - 11:57:52</p></th>
+		</tr>
+		<tr>
+			<th colspan="3">
+				<p class="h4">Cliente: Kleber Soares <br />
+				CPF: 000.000.000-00</p>
+			</th>
+		</tr>
+
+		<tr>
+			<th colspan="3">
+				<p class="h4">Vendedor: Maria Soares <br />
+				CPF: 000.000.000-01</p>
+			</th>
+
+		</tr>
+
+		<tr>
+			<th colspan="3">
+				________________________________________
+			</th>
+
+		</tr>
+
+		<tr>
+			<th class="ttu" colspan="3">
+				<b>Pedido: 123</b>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="top">
+			<td colspan="3">Doce de brigadeiro</td>
+		</tr>
+		<tr>
+			<td>R$7,99</td>
+			<td>2.0</td>
+			<td>R$15,98</td>
+		</tr>
+		<tr>
+			<td colspan="3">Opcional Adicicional: grande</td>
+		</tr>
+		<tr>
+			<td>R$0,33</td>
+			<td>2.0</td>
+			<td>R$0,66</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr class="sup ttu p--0">
+			<td colspan="3">
+				<b>Totais</b>
+			</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Sub-total</td>
+			<td align="right">R$43,60</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Taxa de serviço</td>
+			<td align="right">R$4,60</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Desconto</td>
+			<td align="right">5,00%</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Total</td>
+			<td align="right">R$45,56</td>
+		</tr>
+		<tr class="sup ttu p--0">
+			<td colspan="3">
+				<b>Pagamentos</b>
+			</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Voucher</td>
+			<td align="right">R$10,00</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Dinheiro</td>
+			<td align="right">R$10,00</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Total pago</td>
+			<td align="right">R$10,00</td>
+		</tr>
+		<tr class="ttu">
+			<td colspan="2">Troco</td>
+			<td align="right">R$0,44</td>
+		</tr>
+		<tr class="sup">
+			<td colspan="3" align="center">
+				<b>Pedido:</b>
+			</td>
+		</tr>
+		<tr class="sup">
+			<td colspan="3" align="center">
+				www.salestool.com.br
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
+
+
+
+
+<br/><br/>
+
+<button type="button" class="btn btn-danger" onClick="window.print()">Imprimir</button>
+
+<a href="downloadpdf.php?file=gfgpdf" type="button" class="btn btn-info" >PDF</a>
+
+<a id="create_pdf" type="button" class="btn btn-success" >Gerar PDF enviar Whats</a>
+
+<br/>
+
+
+ <!-- <input type="button" id="create_pdf" value="Generate PDF"> -->
+
+</form>
+
+
+
+
+</body>
+</html>
